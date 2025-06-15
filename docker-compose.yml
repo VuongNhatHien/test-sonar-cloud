@@ -1,0 +1,13 @@
+hehehe 
+not docker-compose filw
+job:
+  name: "example-job"
+  image: "example-image:latest"
+  command: ["echo", "Hello, World!"]
+  environment:
+    - EXAMPLE_VAR=example_value
+  volumes:
+    - /host/path:/container/path
+  ports:
+    - "8080:80"
+  restart: always

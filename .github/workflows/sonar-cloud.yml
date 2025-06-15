@@ -9,25 +9,7 @@ on:
 name: Main Workflow
 jobs:
   sonarqube:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        # Disabling shallow clones is recommended for improving the relevancy of reporting
-        fetch-depth: 0
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@master # Ex: v4.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-        args: >
-          -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
-          -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
-
-    - name: SonarQube Quality Gate check
-      uses: sonarsource/sonarqube-quality-gate-action@master
-      with:
-        pollingTimeoutSec: 600
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    name: SonarQube Scan
+    uses: ./.github/workflows/workflow-sonarqube.yaml
+    secrets: inherit
     
